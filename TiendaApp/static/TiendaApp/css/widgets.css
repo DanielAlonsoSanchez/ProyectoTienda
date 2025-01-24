@@ -1,0 +1,393 @@
+.contenedor-flex {
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contenedor-carrito-categorias {
+
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* __________CARRITO__________ */
+.carrito {
+
+    width: 17.5vw;
+    height: fit-content;
+    min-height: 300px;
+    max-height: 600px;
+
+    resize: none;           /* Desactiva el cambio de tamaño */
+    z-index: 1;             /* Prioridad sobre otros elementos */
+    position: fixed;        /* Posición fija */
+    top: 95px;              /* Distancia desde el borde superior */
+    right: 35px;            /* Distancia desde el borde derecho */
+    transition: top 0.3s;   /* Transición suave */
+    overflow-y: auto;       /* Scroll si el contenido es largo */
+    border-radius: 10px;
+}
+
+.contenedor-botones-graficas {
+
+    display: flex;
+    position: fixed;
+    width: 17.5vw; /* Mismo ancho que el carrito */
+    justify-content: center;
+}
+
+/* __________CATEGORÍAS__________ */
+.categorias {
+
+    position: fixed;
+    top: 95px;
+    left: 35px;
+    z-index: 1;
+    padding: 15px 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    width: 17.5vw;
+    max-height: calc(100vh - 150px); /* Altura adaptable */
+    overflow-y: auto;
+
+    background-color: #ffffff;
+    border: 1px solid #D2D6D9;
+    border-radius: 10px;
+}
+
+.categorias-contenedor {
+
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.titulo-categorias {
+
+    font-family: "Poppins", sans-serif;
+    color: #353B40;
+}
+
+.categorias-texto {
+
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    margin: 5px;
+
+    background-color: #ffffff;
+    color: black;
+    border: 1px solid #D2D6D9;
+    border-radius: 5px;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.categorias-texto:hover {
+
+    background-color: #D2D6D9;
+    color: #353B40;
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+.mensaje-error-carrito{
+
+    color: #DC3545;
+}
+
+/* __________BOTONES Y FORMULARIOS__________ */
+.boton-ordenar {
+
+    margin-left: 5px;
+}
+@media (max-width: 1700px) {
+    .busqueda-boton {
+
+        margin-top: 5px;
+    }
+}
+
+.form-label {
+
+    font-family: "Poppins", sans-serif;
+    color: #353B40;
+}
+
+.seccion-categoria-contenedor {
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 15px;
+
+}
+
+.seccion-categoria{
+
+    padding: 15px 20px;
+
+    width: fit-content;
+    min-width: 300px;
+    max-width: 600px;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 18px;
+    color: #353B40;
+
+    border-right: 6px solid #007bff;
+    background: #ffffff;
+    border-radius: 10px;
+}
+
+.seccion-categoria-contenedor .salir-categoria {
+
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+
+    text-decoration: none; /* Sin subrayado */
+    color: #353B40 !important;
+    font-family: "Poppins", sans-serif;
+
+    background-color: #ffffff;
+    border: 1px solid #e2e6ea;
+    border-radius: 5px;
+
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+/* Efecto hover */
+.seccion-categoria-contenedor .salir-categoria:hover {
+
+    background-color: #F2F2F2;
+    transform: translateY(-2px);
+    text-decoration: underline;
+}
+
+/* Efecto de foco */
+.seccion-categoria-contenedor .salir-categoria:focus {
+
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.4);
+}
+
+/* __________RESPONSIVE__________ */
+@media (max-width: 1457px) {
+
+    .contenedor-flex {
+
+        flex-direction: row;            /* Cambia a disposición horizontal en pantallas pequeñas */
+        justify-content: space-between; /* Espaciado entre los elementos */
+        align-items: flex-start;        /* Alinea los elementos al principio */
+    }
+
+    .contenedor-carrito-categorias {
+
+        width: 930px;
+        flex-direction: row;
+    }
+
+    .carrito {
+
+        position: relative;
+        width: 90%;
+        height: auto;
+        max-height: 500px;
+        right: auto;
+        top: auto;
+        margin: 10px;
+    }
+
+    .contenedor-botones-graficas {
+
+        position: relative;
+        width: 100%;
+    }
+
+    .categorias {
+
+        position: relative;
+        top: auto;
+        left: auto;
+        margin-top: 10px;
+        margin-left: 13px;
+        width: 80%;
+        max-height: none;
+        padding: 15px;
+    }
+
+    .carrito {
+
+        margin-right: 0; /* Quitar posición fija */
+    }
+
+    .boton-ordenar {
+
+        margin-left: 5px;
+        margin-top: 0px;
+    }
+
+    .busqueda-boton {
+
+        margin-top: 0px;
+    }
+
+}
+
+@media (max-width: 996px) {
+
+    .contenedor-carrito-categorias {
+
+        width: 800px;
+        flex-direction: row;
+    }
+
+    .categorias {
+
+        margin-left: 0px;
+    }
+
+    .carrito {
+
+        margin-right: 0;
+    }
+
+
+}
+
+/* ______________MODAL DE GRAFICAS______________ */
+.modal-graficas {
+
+  display: none;    /* Oculto inicialmente */
+  position: fixed;  /* Fijo en toda la pantalla */
+  z-index: 1;
+
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: opacity 0.3s ease;
+}
+
+/* Contenido del modal */
+.modal-graficas-content {
+
+  background-color: #ffffff;
+  margin: 5% auto;
+  padding: 20px;
+  border-radius: 10px;
+
+  width: 90%;
+  max-width: 1200px;
+  height: auto;
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.4s ease-out;
+  text-align: center;
+}
+
+/* Contenedor de las gráficas */
+.graficas-container {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Contenedores de cada gráfica */
+.grafica {
+
+  flex: 1;
+  text-align: center;
+  max-width: 1000px;
+}
+
+/* Imágenes dentro del modal */
+.img-fluid {
+
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  max-width: 1450px;
+  margin: 0 auto;
+}
+
+/* ______________MODAL DE COMPRA______________ */
+
+.modal{
+
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+
+    border-radius: 10px;
+    border: none;
+    background-color: #ffffff;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.modal-header {
+
+    background-color: #007bff;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.modal-header .btn-close {
+
+    background-color: transparent;
+    border: none;
+}
+
+.btn-primary {
+
+    border: none;
+}
+
+.btn-primary:hover {
+
+    background-color: #0056b3;
+}
+
+.list-group-item {
+
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.modal-title{
+
+    font-family: 'Poppins';
+    color: #f8f9fa;
+}
+
+#total-sin-envio, #total-con-envio, .total-producto-identidad, .total-producto-precio{
+
+    font-family: 'Nunito Sans', sans-serif;
+}

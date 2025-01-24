@@ -1,0 +1,39 @@
+{% extends 'ProyectoTiendaWebApp/base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="contenedorFormulario-identificacion container mt-4 p-4 text-light">
+
+    <h5 class="titulo-login">Inicia sesión ahora para aprovecharte de todos los beneficios de la cuenta de cliente de TecnoMarket</h5>
+
+    <form method="post">
+        {% csrf_token %}
+        <div>
+
+            {{ form|crispy }}
+
+            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+
+        </div>
+    </form>
+
+    {% if messages %}
+
+    <!-- Lista sin estilos para agrupar los mensajes -->
+    <ul class="messages list-unstyled mt-4">
+        {% for message in messages %}
+
+            <li class="mensaje-item">
+                <div class="alert alert-{{ message.tags }} text-center"> {{ message }} </div>
+            </li>
+
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+
+{% endblock %}

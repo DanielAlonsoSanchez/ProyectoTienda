@@ -1,0 +1,45 @@
+{% extends 'ProyectoTiendaWebApp/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="contenedorFormulario container mt-4 p-4 text-light">
+
+    <!-- Muestra los mensajes de éxito o error -->
+    {% if messages %}
+
+        <ul class="messages list-unstyled mt-4">
+            {% for message in messages %}
+                <li>
+                    <div class="alert alert-{{ message.tags }} text-center">
+                        {{ message }}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+    {% endif %}
+
+    <!-- Inicio del formulario -->
+    <form method="POST" class="formulario" action="{% url 'contacto' %}">
+        {% csrf_token %}
+
+        <!-- Renderiza los campos del formulario -->
+        <div class="table-responsive">
+
+            <table class="table table-borderless text-light tablaFormulario">
+                {{ formulario.as_table }}
+            </table>
+
+        </div>
+
+        <!-- Botón de enviar -->
+        <div class="text-center mt-3">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}

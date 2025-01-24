@@ -1,0 +1,90 @@
+{% extends 'ProyectoTiendaWebApp/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Hero Section: Texto al lado de Imagen -->
+<section class="hero-section">
+    <div class="hero-container">
+        <div class="hero-content">
+
+            <!-- Columna de Texto -->
+            <div class="hero-text-column">
+                <div class="hero-text">
+
+                    <h2 class="hero-heading">
+                        <span class="hero-heading-upper">Entrega Rápida</span>
+                        <span class="hero-heading-lower">Los Mejores Productos y Servicios</span>
+                    </h2>
+
+                    <p class="hero-description">
+                        En TecnoMarket, ofrecemos lo último en tecnología tanto en productos como en servicios especializados.
+                        ¡Disfruta de productos de calidad y un servicio excepcional con entrega rápida y gratuita!
+                    </p>
+
+                    <a href="{% url 'tienda' %}" class="hero-button btn btn-primary">Explorar Productos</a>
+
+                </div>
+            </div>
+
+            <!-- Columna de Imagen -->
+            <div class="hero-image-column">
+                <img class="hero-img" src="{% static 'ProyectoTiendaWebApp/img/principal.jpg' %}" alt="Entrega Rápida">
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Sección combinada de CTA y otra información -->
+<section class="cta-info-section">
+    <div class="container">
+        <div class="cta-info-content">
+
+            <!-- Tarjeta de CTA -->
+            <div class="custom-cta-card">
+                <div class="custom-card-body">
+
+                    <h2 class="cta-heading">
+                        <span class="cta-heading-upper">Expertos del Sector</span>
+                        <span class="cta-heading-lower">Compromiso y Calidad</span>
+                    </h2>
+
+                    <p class="cta-description">
+                        Con nuestras amplias capacidades, somos capaces de garantizar un servicio puntual y profesional.
+                    </p>
+
+                </div>
+            </div>
+
+            <!-- Tarjeta de información adicional -->
+            <div class="custom-info-card">
+                <div class="custom-card-body">
+
+                    <h3 class="info-heading">
+                        <span class="info-heading-upper">Compra Segura y Confiable</span>
+                        <span class="info-heading-lower">Garantía de Satisfacción</span>
+                    </h3>
+
+                    <p class="info-description">
+                        Si no estás completamente satisfecho con tu compra u servicio, ¡te ofrecemos devolución gratuita!
+                        Porque tu satisfacción es lo que más nos importa.
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Botón centrado debajo de las tarjetas -->
+        <div class="cta-button-container">
+            <a href="{% url 'contacto' %}" class="btn btn-primary">Contáctanos</a>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
+
+

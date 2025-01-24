@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Welcome to Home</title>
+
+    <!-- Requerido para que django carge los archivos static -->
+    {% load static %}
+
+    <!-- favicom -->
+    <link rel="icon" href="{% static 'ProyectoTiendaWebApp\img\favicon.ico' %}" type="image/x-icon">
+
+    <!-- Bootstrap -->
+    <link href="{% static 'ProyectoTiendaWebApp/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="{% static 'ProyectoTiendaWebApp/css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'ProyectoTiendaWebApp/css/home.css' %}" rel="stylesheet">
+    <link href="{% static 'ServiciosApp/css/servicios.css' %}" rel="stylesheet">
+    <link href="{% static 'TiendaApp/css/tienda.css' %}" rel="stylesheet">
+    <link href="{% static 'TiendaApp/css/widgets.css' %}" rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- smtp -->
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+
+</head>
+
+<body>
+
+<div class="contenedor-principal">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light align-items-center" id="mainNav">
+
+        <!-- Enlace a Inicio -->
+        <div class="home mr-auto p-2">
+
+            <li class="nav-item {% if request.path|slice:':3' == '/' %} active {% endif %}}">
+
+                <a class="nav-link text-uppercase text-expanded" href="{% url 'home' %}">
+                    <img src="{% static '\ProyectoTiendaWebApp\img\logo.png' %}" alt="Inicio" class="logo-imagen">
+                    <!-- alt coloca una palabra si la imagen no carga -->
+                </a>
+
+            </li>
+
+        </div>
+
+        <!-- Botón hamburguesa -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon boton-navbar"></span>
+        </button>
+
+        <!-- Contenedor colapsable -->
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <ul class="navbar-nav p-2">
+                    <!-- mx-auto: centra horizontalmente el contenido -->
+
+                    <!-- Enlace a Servicios -->
+                    <li class="nav-item {% if request.path|slice:':11' == '/servicios/' %} active {% endif %}} px-lg-3">
+                        <a class="nav-link text-uppercase text-expanded" href="{% url 'servicios' %}">Servicios</a>
+                    </li>
+
+                    <!-- Enlace a Tienda -->
+                    <li class="nav-item {% if request.path|slice:':8' == '/tienda/' %} active {% endif %}} px-lg-3">
+                        <a class="nav-link text-uppercase text-expanded" href="{% url 'tienda' %}">Tienda</a>
+                    </li>
+
+                    <!-- Enlace a Contacto -->
+                    <li class="nav-item {% if request.path|slice:':10' == '/contacto/' %} active {% endif %}} px-lg-3">
+                        <a class="nav-link text-uppercase text-expanded" href="{% url 'contacto' %}">Contacto</a>
+                    </li>
+
+                    <!-- Enlace visible solo para superusuarios a la Administración -->
+                    {% if user.is_superuser %}
+                    <li class="nav-item {% if request.path|slice:':7' == '/admin/' %} active {% endif %}} px-lg-3">
+                        <a class="nav-link text-uppercase text-expanded; color: red;" href="/admin/">Administración</a>
+                    </li>
+                    {% endif %}
+
+                    <!-- Enlaces de usuario para pantallas pequeñas -->
+                    <div class="usuario d-lg-none">
+                        <li class="nav-item">
+                            {% if user.is_authenticated %}
+
+                            <a class="nav-link texto-usuario-pantallapequeña" href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a>
+
+                            {% else %}
+
+                            <a class="nav-link texto-usuario-pantallapequeña" href="{% url 'entrar_sesion' %}">Identifícate</a>
+                            <a class="nav-link texto-usuario-pantallapequeña" href="{% url 'autenticacion' %}">Regístrate</a>
+
+                            {% endif %}
+                        </li>
+                    </div>
+
+                </ul>
+            </div>
+        </div>
+
+        <!-- Usuario para pantallas grandes -->
+        <div class="usuario d-none d-lg-flex ml-auto p-2">
+            <div class="contenedor-usuario">
+
+                <img src="{% static '\ProyectoTiendaWebApp\img\user.png' %}" alt="User" class="user-imagen">
+
+                <div class="texto-usuario">
+                    {% if user.is_authenticated %}
+                    <p>Hola, {{ user.username }}</p>
+                    <a href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a>
+                    {% else %}
+                    <p>Bienvenido,</p>
+                    <a href="{% url 'entrar_sesion' %}">Identifícate</a> / <a href="{% url 'autenticacion' %}">Regístrate</a>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+
+    </nav>
+
+    <div class="contenedor-relleno">
+
+        <!-- Contenido Cambiante -->
+        {% block content %}
+
+        {% endblock %}
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer text-faded text-center py-5">
+        <div class="enlaces-footer">
+
+            <!-- Enlaces de políticas -->
+            <p class="m-0 mbt">
+                <a href="sample.html" class="link">Política de privacidad</a> ·
+                <a href="sample.html" class="link">Aviso legal</a> ·
+                <a href="sample.html" class="link">Cookies</a>
+            </p>
+
+            <!-- Copyright -->
+            <p class="m-0 mbt1">&copy; TecnoMarket 2024</p>
+
+        </div>
+    </footer>
+
+</div>
+
+<!-- Bootstrap -->
+<script src="{% static 'ProyectoTiendaWebApp/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'ProyectoTiendaWebApp/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+</html>
+

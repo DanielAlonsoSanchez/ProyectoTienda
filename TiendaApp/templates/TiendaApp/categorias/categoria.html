@@ -1,0 +1,340 @@
+{% extends 'ProyectoTiendaWebApp/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container d-flex">
+
+    <div class="contenedor-carrito-categorias">
+
+        <!-- Sidebar con las categorías -->
+        <div class="categorias">
+
+            <h5 class="titulo-categorias">Buscador:</h5>
+
+            <div class="buscador-contenedor">
+                <form method="get" action="{% url 'tienda' %}" class="buscador">
+
+                    <input class="buscador-input" type="text" name="q" placeholder="Buscar productos" value="{{ query }}">
+                    <button type="submit" class="btn btn-primary btn-sm busqueda-boton"> Buscar </button>
+
+                </form>
+            </div>
+
+            <div class="categorias-contenedor">
+
+                <!-- Contenedor de categorías que se colapsa solo en pantallas pequeñas -->
+                <div class="collapse d-sm-block " id="categoriasCollapse">
+
+                    <h5 class="titulo-categorias">Categorías:</h5>
+
+                    {% for categoria in categorias %}
+
+                        <a class="categorias-texto" href="{% url 'categoria' categoria.id %}"> {{ categoria.nombre }} </a>
+
+                    {% empty %}
+
+                        <p>No hay categorías disponibles.</p>
+
+                    {% endfor %}
+
+                </div>
+            </div>
+
+            <div class="ordenar-productos mt-3">
+
+                <h5 for="ordenarPor" class="form-label">Ordenar por:</h5>
+
+                <form method="get" action="{% url 'tienda' %}" class="d-flex align-items-center gap-2">
+
+                    <select name="ordenar" id="ordenarPor" class="form-select form-select-sm w-auto">
+                        <option value="">Seleccione</option>
+                        <option value="precio_asc">Precio (Menor a Mayor)</option>
+                        <option value="precio_desc">Precio (Mayor a Menor)</option>
+                        <option value="ventas_desc">Ventas (Más Vendidos)</option>
+                        <option value="nombre_asc">Nombre (A-Z)</option>
+                        <option value="nombre_desc">Nombre (Z-A)</option>
+                    </select>
+
+                    <button type="submit" class="btn btn-primary btn-sm boton-ordenar"> Ordenar </button>
+
+                </form>
+
+            </div>
+        </div>
+
+        <!-- Carrito y Gráficas -->
+        <div class="carrito">
+            {% if request.user.is_authenticated %}
+
+            <!-- Esto es el html del Carro -->
+            {% include "TiendaApp/carro/carro.html" %}
+
+            {% else %}
+            <div class="alert alert-danger text-center"> Inicia sesión para ver el Carro </div>
+
+            <a href="{% url 'entrar_sesion' %}" class="btn btn-success btn-sm w-100 mb-2">Iniciar Sesión</a>
+
+            <a href="{% url 'autenticacion' %}" class="btn btn-success btn-sm w-100 mb-2">Registrarse</a>
+            {% endif %}
+
+            {% if request.user.is_authenticated %}
+            <!-- Botón Modal de Gráficas -->
+            <div class="contenedor-botones-graficas">
+                <button class="btn btn-primary btn-sm w-100 mb-2" data-bs-target="#graficasModal">Ver Gráficas </button>
+            </div>
+            {% endif %}
+
+        </div>
+
+        <script src="{% static 'js/Carro.js' %}"></script>
+
+        <!-- Modal de Gráficas -->
+        <div id="graficasModal" class="modal-graficas">
+            <div class="modal-graficas-content">
+
+                <h2>Gráficas de Producto</h2>
+
+                <!-- Contenedor de las gráficas -->
+                <div class="graficas-container">
+
+                    <!-- Gráfica de Ventas -->
+                    <div class="grafica">
+                        <h3>Gráfica de Ventas</h3>
+                        <img src="{{ grafica_ventas }}" alt="Gráfica de Ventas" class="img-fluid">
+                    </div>
+
+                    <!-- Gráfica de Beneficios -->
+                    <div class="grafica">
+                        <h3>Gráfica de Beneficios</h3>
+                        <img src="{{ grafica_beneficios }}" alt="Gráfica de Beneficios" class="img-fluid">
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="seccion-categoria-contenedor">
+
+            <!-- Título de la categoría -->
+            <h2 class="seccion-categoria"> Categoría: {{ categoria.nombre }}</h2>
+
+            <a href="{% url 'tienda' %}" class="salir-categoria"> Salir de la Categoría </a>
+
+
+        </div>
+
+        <!-- Mostramos solo los productos que pertenecen a esta categoría -->
+        {% for producto in productos %}
+
+        <div class="col-12 contenedor-cards">
+
+            <div class="card shadow-sm p-2 d-flex flex-row align-items-center">
+
+                <!-- Columna para la imagen del producto -->
+                <div class="col-md-3 d-flex align-items-center justify-content-center">
+                    <img src="{{ producto.imagen.url }}" class="img-fluid rounded" alt="{{ producto.comprobar_nombre }}" style="width: 100%; max-width: 180px; object-fit: cover;">
+                </div>
+
+                <!-- Columna para los detalles del producto -->
+                <div class="col-md-6">
+
+                    <div class="d-flex justify-content align-items-start">
+
+                        <h3 class="card-title">{{ producto.nombre }}</h3>
+
+                        {% if user.is_superuser and producto.aviso_falta_stock %}
+                        <a href="/admin/TiendaApp/producto/{{ producto.id }}" class="btn btn-info btn-sm px-4 boton-administrar"> Administrar </a>
+                        {% endif %}
+
+                    </div>
+
+                    <div class="precio-contenedor">
+
+                        {% if producto.descuento == 0 %}
+                            <h4 class="precio"> {{ producto.precio_con_iva|floatformat:2 }} € </h4>
+                        {% else %}
+
+                            <h4 class="precio_descontado px-1"> {{ producto.precio_con_iva|floatformat:2 }} € </h4>
+                            <h5 class="precio_base"> <s> {{ producto.precio_base_con_iva |floatformat:2 }} € </s> </h5>
+                            <h5 class="descuento"> {{ producto.descuento }} % </h5>
+
+                        {% endif %}
+
+                        <!-- Input para cambiar el descuento directamente -->
+                        {% if user.is_superuser %}
+
+                             <form method="post" action="{% url 'cambiar_descuento' producto.id %}" class="mt-1">
+
+                                 {% csrf_token %}
+                                 <div class="cambiar-descuento">
+
+                                     <input type="number" name="porcentaje_descuento" class="form-control">
+                                     <button type="submit" class="btn btn-danger"> % </button>
+
+                                 </div>
+                            </form>
+
+                        {% endif %}
+
+                    </div>
+
+                    <p class="card-text mb-1 text-secondary">Stock: {{ producto.stock_total }} unidades, {{ producto.stock_en_tienda }} en tienda</p>
+                    <p class="card-text">{{ producto.sinopsis|truncatewords:30 }}</p>
+
+                </div>
+
+                <!-- Columna para botones y opciones de stock -->
+                <div class="col-md-3 text-center d-flex flex-column align-items-center">
+
+                    {% if producto.stock_total > 0 %}
+
+                        <a href="{% url 'carro:agregar' producto.id %}" class="btn btn-primary btn-sm w-100 mb-2">Agregar al Carro</a>
+
+                    {% else %}
+
+                        <button class="btn btn-danger btn-sm w-100 mb-2" disabled>Sin existencias</button>
+
+                    {% endif %}
+
+                    {% if user.is_superuser %}
+
+                        <div class="alert alert-warning p-2 w-100 mt-2" role="alert">
+
+                            <!-- mensaje de la funcion aviso_falta_stock -->
+                            <small>{{ producto.aviso_falta_stock }}</small>
+
+                            <!-- Botón para reponer el stock en tienda desde almacén -->
+                            <form method="post" action="{% url 'reponer_tienda' producto.id %}" class="mt-1">
+                                {% csrf_token %}
+                                <input type="hidden" name="cantidad_fija" value="10">
+                                <button type="submit" class="btn btn-primary btn-sm w-100">Reponer Tienda</button>
+                            </form>
+
+                            <!-- Botón para reponer el stock en almacén -->
+                            <form method="post" action="{% url 'reponer_almacen' producto.id %}" class="mt-1">
+
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-secondary btn-sm w-100"> Reponer Almacén </button>
+
+                                <input type="number" name="cantidad_reposicion" placeholder="Cantidad a reponer" min="1" class="form-control form-control-sm">
+
+                            </form>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+<div class="contenedor-botones-subir-bajar">
+
+    <button class="boton-subir"> ↑ </button>
+    <button class="boton-bajar"> ↓ </button>
+
+</div>
+
+<!-- Modal de Compra -->
+<div id="comprarModal_{{ usuario.id }}" class="modal" tabindex="-1" aria-labelledby="comprarModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+
+            <!-- Título del Modal -->
+            <div class="modal-header border-0">
+                <h5 class="modal-title text-center w-100" id="comprarModalLabel">Detalles de la Compra</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <!-- Lista de productos en el carrito -->
+                <h4 class="mb-3">Productos en el carrito:</h4>
+
+                <ul class="list-group mb-4">
+                    {% for key, value in request.session.carro.items %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="total-producto-identidad">{{ value.nombre }} - cantidad: {{ value.cantidad }}</span>
+                            <span class="total-producto-precio">{{ value.precio | floatformat:2 }} €</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <!-- Total provisional -->
+                <div class="d-flex justify-content-between">
+                    <h5>Total provisional:</h5>
+                    <h5><span id="total-sin-envio">{{ importe_total_carro | floatformat:2 }}</span> €</h5>
+                </div>
+
+                <!-- Aviso de que no hay cargos de envío -->
+                <div class="alert alert-success mt-3" role="alert">
+                    <strong>¡Sin cargos de envío!</strong> Todas las compras incluyen envío gratuito.
+                </div>
+
+                <!-- Línea divisoria -->
+                <hr class="my-4">
+
+                <!-- Formulario de opciones de compra -->
+                <form action="{% url 'carro:comprar' %}" method="POST">
+                    {% csrf_token %}
+
+                    <!-- Dirección de envío -->
+                    <div class="form-group mb-3" id="direccion-envio">
+                        <label for="direccion" class="form-label">Dirección de envío:</label>
+                        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Introduce tu dirección de envío" required>
+                    </div>
+
+                    <!-- Detalles de tarjeta -->
+                    <h5 class="mt-4">Detalles de la Tarjeta</h5>
+
+                    <div class="form-group mb-3">
+                        <label for="nombre-tarjeta" class="form-label">Nombre en la tarjeta:</label>
+                        <input type="text" class="form-control" id="nombre-tarjeta" name="nombre_tarjeta" placeholder="Nombre completo" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="numero-tarjeta" class="form-label">Número de tarjeta:</label>
+                        <input type="text" class="form-control" id="numero-tarjeta" name="numero_tarjeta" placeholder="0000 0000 0000 0000" pattern="\d{16}" required>
+                    </div>
+
+                    <div class="form-row d-flex justify-content-between">
+                        <div class="form-group mb-3 col-6">
+                            <label for="fecha-expiracion" class="form-label">Fecha de expiración:</label>
+                            <input type="text" class="form-control" id="fecha-expiracion" name="fecha_expiracion" placeholder="MM/AA" pattern="\d{2}/\d{2}" maxlength="5" required>
+                        </div>
+
+                        <div class="form-group mb-3 col-4">
+                            <label for="cvv" class="form-label">CVV:</label>
+                            <input type="text" class="form-control" id="cvv" name="cvv" placeholder="123" pattern="\d{3}" maxlength="3" required>
+                        </div>
+                    </div>
+
+                    <!-- Total final -->
+                    <div class="d-flex justify-content-between mt-3">
+                        <h5>Total final:</h5>
+                        <h5><span id="total-con-envio">{{ importe_total_carro | floatformat:2 }}</span> €</h5>
+                    </div>
+
+                    <!-- Botón para confirmar la compra -->
+                    <button type="submit" class="btn btn-primary w-100 mt-4">Confirmar Compra</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts de los modales -->
+<script src="{% static 'TiendaApp/js/BotonesSubirBajar.js' %}"></script>
+<script src="{% static 'TiendaApp/js/ModalComprar.js' %}"></script>
+<script src="{% static 'TiendaApp/js/ModalGraficas.js' %}"></script>
+
+{% endblock %}

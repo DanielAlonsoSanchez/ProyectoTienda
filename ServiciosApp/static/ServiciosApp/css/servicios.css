@@ -1,0 +1,94 @@
+/* Contenedor de las bandas */
+.servicios-container {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra las bandas horizontalmente */
+
+  gap: 1rem;
+  margin: 20px;
+}
+
+/* Las bandas */
+.servicio-banda {
+
+  display: flex;
+  align-items: stretch;         /* Misma altura para todas las bandas */
+  justify-content: flex-start;  /* Alinea los elementos a la izq */
+
+  max-width: 1500px;
+  max-height: 250px;
+  background-color: #f8f9fa;
+
+  border-radius: 10px;
+  overflow: hidden; /* Evitar que elementos sobresalgan */
+}
+
+/* Imagenes de las bandas */
+.banda-img {
+
+  width: 40%;
+  height: 100%;
+}
+
+/* Textos de las bandas */
+.banda-text {
+
+  width: 60%;
+  padding: 2rem;
+  text-align: left;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra el contenido verticalmente */
+}
+
+/* Texto principal */
+.banda-text .section-heading {
+
+  text-transform: uppercase; /* Texto en mayúsculas */
+  font-size: 2rem;
+  color: #007bff;
+  margin-bottom: 0.5rem;
+}
+
+/* Texto secundario */
+.banda-text .section-heading-upper {
+
+  font-size: 1rem;
+  color: #555555;
+  display: block;
+}
+
+/* Para pantallas pequeñas */
+@media screen and (max-width: 768px) {
+
+  /* Las bandas */
+  .servicio-banda {
+
+    flex-direction: column;
+    width: 100%;
+  }
+
+  /* Imagenes */
+  .banda-img {
+
+    width: 100%;
+    height: 200px;
+    object-fit: cover; /* Asegura que la imagen cubra el área */
+  }
+
+  /* El texto */
+  .banda-text {
+
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  /* Ajustar el tamaño del título y subtítulo */
+  .section-heading {
+
+    font-size: 1.5rem;
+  }
+}

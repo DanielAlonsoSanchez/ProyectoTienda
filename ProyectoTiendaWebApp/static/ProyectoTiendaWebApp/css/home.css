@@ -1,0 +1,218 @@
+/* __________HERO__________ */
+.hero-section {
+
+  width: 100%;
+  background-color: #353B40;
+  padding: 4rem 0;
+}
+
+.hero-container {
+
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hero-content {
+
+  display: flex;
+  align-items: center;           /* Centra verticalmente */
+  justify-content: space-between; /* Espaciado entre columnas */
+  gap: 2rem;
+  flex-wrap: nowrap;             /* Mantiene las columnas lado a lado */
+}
+
+/* Columna de texto */
+.hero-text-column {
+
+  flex: 1; /* 50% del espacio */
+  padding-right: 2rem;
+  text-align: left;
+}
+
+.hero-text {
+
+  max-width: 500px;
+}
+
+.hero-heading {
+
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.hero-heading-upper {
+
+  display: block;
+  font-size: 1.2rem;
+  color: #f8f9fa;
+}
+
+.hero-heading-lower {
+
+  font-size: 2rem;
+  color: #007bff;
+}
+
+.hero-description {
+
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  color: #f8f9fa;
+  line-height: 1.6;
+}
+
+.hero-button {
+
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+/* Columna de imagen */
+.hero-image-column {
+
+  flex: 1; /* 50% del espacio */
+  text-align: center;
+}
+
+.hero-img {
+
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+  .hero-content {
+
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-text-column,
+  .hero-image-column {
+
+    flex: none;
+    width: 100%;
+    padding: 0;
+  }
+
+  .hero-text {
+
+    max-width: 100%;
+  }
+
+  .hero-img {
+
+    max-width: 100%;
+  }
+}
+
+/* __________CTA__________ */
+
+.cta-info-section {
+
+  padding: 3rem 0;
+}
+
+.cta-info-content {
+
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+/* Estilo general para tarjetas */
+.custom-cta-card,
+.custom-info-card {
+
+  flex: 1;
+  max-width: 50%;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto hover */
+.custom-cta-card:hover,
+.custom-info-card:hover {
+
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Títulos y descripción */
+.custom-card-body h2,
+.custom-card-body h3 {
+
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.cta-heading-upper,
+.info-heading-upper {
+
+  display: block;
+  font-size: 1.2rem;
+  color: #6c757d;
+}
+
+.cta-heading-lower,
+.info-heading-lower {
+
+  font-size: 1.5rem;
+  color: #007bff;
+}
+
+.cta-description,
+.info-description {
+
+  font-size: 1rem;
+  color: #555555;
+  line-height: 1.6;
+}
+
+/* Botón centrado debajo de las tarjetas */
+.cta-button-container {
+
+  text-align: center;
+}
+
+.cta-button-container .btn {
+
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+
+  .cta-info-content {
+
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .custom-cta-card,
+  .custom-info-card {
+
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,310 @@
+/* Configuración del fondo y el cuerpo de la página */
+html, body {
+
+  background: #D2D6D9;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+
+  font-family: 'Nunito Sans', sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Contenedor principal */
+.contenedor-principal {
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Ajuste para elementos hijos */
+body > div, body > main {
+
+  flex: 1;
+}
+
+.contenedor-relleno {
+
+  flex: 1;
+}
+
+/* __________NAVBAR__________ */
+
+/* Encabezado */
+#mainNav {
+
+  background-color: #353B40 !important;
+  font-family: 'Raleway';
+}
+
+#mainNav .navbar-brand {
+
+  color: #f8f9fa;
+}
+
+#mainNav .navbar-brand,
+#mainNav .navbar-nav .nav-item .nav-link {
+
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 800;
+}
+
+#mainNav .navbar-nav .nav-item.active .nav-link {
+
+  color: #f8f9fa;
+  text-decoration: underline;
+}
+
+#mainNav .navbar-nav .nav-item .nav-link:hover {
+
+  color: rgba(255, 255, 255, 0.4);
+  text-decoration: underline;
+}
+
+#mainNav .div {
+
+  display: flex;
+  align-items: center;
+}
+
+/* __________LOGO__________ */
+.home {
+
+  list-style-type: none;
+  left: 100px;
+  width: 245px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.logo-imagen {
+
+  width: 200px;
+  height: auto;
+}
+
+@media (max-width: 1500px) {
+
+  .home {
+
+    margin-left: 0px;
+  }
+}
+
+/* __________USUARIO__________ */
+.usuario {
+
+  right: 50px;
+  align-items: center;
+  padding: 0px;
+
+  color: #f8f9fa;
+  width: 245px;
+  height: auto;
+  list-style-type: none;
+}
+
+.contenedor-usuario {
+
+  display: flex;
+  align-items: center;
+  left: 50px;
+  gap: 10px;
+}
+
+.user-imagen {
+
+  width: 15%;
+  height: auto;
+}
+
+.texto-usuario p {
+
+  margin: 0;
+}
+
+.texto-usuario a {
+
+  font-weight: bold;
+}
+
+.texto-usuario-pantallapequeña {
+
+  color: #007bff !important;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+
+/* __________Boton Navbar__________ */
+.navbar-toggler {
+
+  border: 2px solid #ff6600;
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+}
+
+/* Boton al pasar el ratón */
+.navbar-toggler:hover {
+
+  background-color: #007bff;
+  border-color: #007bff;
+  transform: scale(1.1);     /* Aumenta el tamaño */
+}
+
+/* Estilo del ícono interno */
+.boton-navbar {
+
+  background-color: #007bff;
+  width: 30px;
+  height: 3px;
+  display: block;
+  margin: 5px auto;
+
+  transition: background-color 0.3s ease;
+}
+
+/* Cambia el color del ícono al pasar el ratón por el botón */
+.navbar-toggler:hover .boton-navbar {
+
+  background-color: #ffffff;
+}
+
+/* Estilo para el ícono cuando el menú está abierto */
+.navbar-toggler[aria-expanded="true"] .boton-navbar {
+
+  background-color: #007bff;
+}
+
+/* __________FOOTER__________ */
+.footer {
+
+  background-color: #353B40;
+  text-align: center;
+  padding: 1rem 0;
+  width: 100%;
+}
+
+.text-faded {
+
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* __________TIPOGRAFÍA__________ */
+h1, h2, h3, h4, h5, h6 {
+
+  font-family: 'Raleway';
+  color: #353B40;
+}
+
+.titulo-registro{
+
+  font-family: 'Poppins';
+  color: #ffffff;
+}
+
+.titulo-login{
+
+  font-family: 'Poppins';
+  color: #ffffff;
+}
+
+p {
+
+  line-height: 1.75;
+}
+
+.btn-xl {
+
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 1.5rem 2rem;
+}
+
+.btn {
+
+  box-shadow: 0px 3px 3px 0px rgba(33, 37, 41, 0.1);
+}
+
+a.link {
+
+  color: rgba(255, 255, 255, 0.7);
+}
+
+a.link:hover {
+
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* __________ERRORES__________ */
+ul.errorlist {
+
+  padding-top: .75rem;
+  font-style: italic;
+  color: red;
+}
+
+/* __________ENLACES DE CATEGORÍAS__________ */
+.linksCategorias {
+
+  color: #f8f9fa !important;
+  text-decoration: underline;
+}
+
+.linksCategorias:hover {
+
+  text-decoration: none;
+}
+
+/* __________FORMULARIOS__________ */
+
+/* Identifícate */
+.contenedorFormulario {
+
+  background-color: #353B40 !important;
+  width: 30%;
+  height: auto;
+
+  margin: 20px auto;
+  border-radius: 10px;
+  padding: 10px 10px;
+}
+
+/* Regístrate */
+.contenedorFormulario-identificacion {
+
+  background-color: #353B40;
+  width: 500px;
+  max-height: 500px;
+
+  margin: 20px auto;
+  border-radius: 10px;
+  padding: 10px 10px;
+}
+
+@media(max-width: 768px) {
+
+  .contenedorFormulario,
+  .contenedorFormulario-identificacion {
+
+    width: 80%;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 1500px) {
+  .contenedorFormulario,
+  .contenedorFormulario-identificacion {
+
+    width: 50%;
+  }
+}

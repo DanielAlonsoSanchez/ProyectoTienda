@@ -1,0 +1,180 @@
+/* __________CONTENEDORES PRINCIPALES__________ */
+.container.d-flex {
+
+    display: flex;
+    flex-direction: column; /* Alinea las tarjetas en una columna */
+    align-items: center;    /* Centra las tarjetas horizontalmente */
+    min-height: 100vh;      /* Asegura que el contenedor ocupe el 100% de la altura de la ventana */
+}
+
+/* __________TARJETAS__________ */
+.card {
+
+    border-radius: 10px;
+    margin-bottom: 5px;
+    width: 58vw;
+}
+
+.card-title {
+
+    font-family: 'Poppins';
+    color: #007bff;
+}
+
+/* __________PRECIOS__________ */
+.precio-contenedor {
+
+    display: flex;
+    align-items: center;
+}
+
+.precio {
+
+    font-family: 'Inter';
+    color: black;
+    width: fit-content;
+    min-width: 105px;
+    max-width: 150px;
+    text-align: left;
+}
+
+/* Descuento destacado */
+.precio-contenedor .descuento {
+
+    font-family: 'Inter';
+    color: #f8f9fa;
+    background-color: #D93654;
+    border: 1px solid #D93654;
+    border-radius: 3px;
+    padding: 2px;
+    width: fit-content;
+    min-width: 60px;
+    max-width: 125px;
+    text-align: center;
+}
+
+/* Precio final con descuento */
+.precio-contenedor .precio_descontado {
+
+    font-family: 'Inter';
+    color: #D93654;
+    display: flex;
+    text-align: left;
+    width: fit-content;
+    min-width: 125px;
+    max-width: 200px;
+    font-size: 1.5em;
+    max-height: 30px;
+    overflow: hidden;
+
+    white-space: nowrap; /* Evitar salto de línea */
+}
+
+/* Precio base tachado */
+.precio_base {
+
+    font-family: 'Inter';
+    width: fit-content;
+    min-width: 100px;
+    max-width: 150px;
+    display: flex;
+    text-align: left;
+}
+
+/* __________FORMULARIOS__________ */
+.cambiar-descuento {
+
+    display: flex;
+    align-items: center;
+    margin-bottom: 13px;
+}
+
+.cambiar-descuento input {
+
+    margin-right: 1px;
+    margin-left: 5px;
+    width: 25%;
+}
+
+/* __________RESPONSIVE__________ */
+@media (max-width: 1457px) {
+
+    .container.d-flex {
+
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+
+        width: 930px;
+        min-width: 250px;
+        max-width: 900px;
+    }
+
+    .card-title {
+
+        margin:0px;
+    }
+
+    .boton-administrar{
+
+        margin:0px;
+    }
+}
+
+@media (max-width: 996px) {
+
+    .card {
+
+        width: 800px;
+    }
+}
+
+/* __________FILA DE PRODUCTOS__________ */
+.row {
+
+    display: inline-block;
+    padding: 11px;
+}
+
+/* __________BOTONES SUBIR Y BAJAR__________ */
+.contenedor-botones-subir-bajar {
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    position: fixed;
+    right: 10px;
+    bottom: 20px;
+}
+
+/* Botones subir y bajar */
+.boton-subir,
+.boton-bajar {
+
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Botón redondo */
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+/* Efecto hover en botones subir y bajar */
+.boton-subir:hover,
+.boton-bajar:hover {
+
+    background-color: #555555;
+}
+
+/* Botón administrar */
+.boton-administrar {
+
+    margin-left: 20px;
+}
